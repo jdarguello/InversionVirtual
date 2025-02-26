@@ -4,12 +4,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -28,43 +26,10 @@ public class ConfigServiceTests extends GeneralTest {
 
     protected InversionService service;
 
-    protected Transaccion transaccionMicro1;
-
-    protected Transaccion transaccionMicro2;
-
-    protected Transaccion transaccionReclamoMicro1BD;
-
-    protected Transaccion transaccionReclamoMicro2BD;
-
-    protected InversionVirtual inversionBD1;
-
-    protected InversionVirtual inversionBD2;
-
     @Override
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws Exception {
         super.setUp();  //=> trae los objetos de pruebas
-
-        //Objetos 'guardados' en base de datos
-        transaccionMicro1 = this.copiarTransaccion(transaccionInversion1, 103L, 
-            LocalDateTime.of(2021, 12, 1, 1, 10, 0));
-        transaccionMicro2 = this.copiarTransaccion(transaccionInversion2, 104L,
-            LocalDateTime.now());
-
-        transaccionReclamoMicro1BD = this.copiarTransaccion(transaccionReclamoMicro1, 105L,
-            LocalDateTime.now());
-        transaccionReclamoMicro2BD = this.copiarTransaccion(transaccionReclamoMicro2, 106L,
-            LocalDateTime.now());
-        
-        transaccionReclamoMicro2BD.setMonto(transaccionReclamoMicro2.getMonto());
-
-        inversionBD1 = this.copiarInversion(inversionJohana1, 15L);
-        inversionBD2 = this.copiarInversion(inversionJohana2, 16L);
-
-        inversionBD1.setTransaccionEnvio(transaccionMicro1);
-        inversionBD1.setTransaccionEnvioId(transaccionMicro1.getTransaccionId());
-        inversionBD2.setTransaccionEnvio(transaccionMicro2);
-        inversionBD2.setTransaccionEnvioId(transaccionMicro2.getTransaccionId());
 
         //Definición de mocks
         micro = mock(MicroservicioCuentas.class);
@@ -143,20 +108,5 @@ public class ConfigServiceTests extends GeneralTest {
                 inversionBD1,
                 inversionBD2
             ));
-    }
-
-    protected InversionVirtual copiarInversion(InversionVirtual inversion, Long inversionId) {
-        InversionVirtual copia = new InversionVirtual();
-        BeanUtils.copyProperties(inversion, copia);
-        copia.setInversionId(inversionId);
-        return copia;
-    }
-
-    protected Transaccion copiarTransaccion (Transaccion transaccion, Long transaccionId, LocalDateTime fechaCreacion) {
-        Transaccion copia = new Transaccion();
-        BeanUtils.copyProperties(transaccion, copia);
-        copia.setTransaccionId(transaccionId);
-        copia.setFechaCreacion(fechaCreacion);
-        return copia;
     }
 }

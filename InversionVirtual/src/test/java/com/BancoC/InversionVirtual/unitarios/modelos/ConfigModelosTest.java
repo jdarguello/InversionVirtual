@@ -17,7 +17,7 @@ public class ConfigModelosTest extends GeneralTest {
 
     @Override
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws Exception {
         super.setUp(); //=> importa los objetos de pruebas
 
         inversionJohana1 = repository.save(inversionJohana1);

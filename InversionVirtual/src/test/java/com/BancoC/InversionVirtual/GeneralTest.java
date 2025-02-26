@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.springframework.beans.BeanUtils;
 
 import com.BancoC.InversionVirtual.modelos.InversionVirtual;
 import com.BancoC.InversionVirtual.modelos.ext.Cliente;
@@ -39,8 +40,20 @@ public class GeneralTest {
 
     protected InversionVirtual inversionFalsa;
 
+    protected Transaccion transaccionMicro1;
+
+    protected Transaccion transaccionMicro2;
+
+    protected Transaccion transaccionReclamoMicro1BD;
+
+    protected Transaccion transaccionReclamoMicro2BD;
+
+    protected InversionVirtual inversionBD1;
+
+    protected InversionVirtual inversionBD2;
+
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws Exception {
         Johana = Cliente.builder()
             .clienteId(1L)
             .nombre("Joahan Aristizabal")
@@ -112,6 +125,42 @@ public class GeneralTest {
             .cuentaDestino(cuentaAhorrosJohana)
             .monto((1+inversionJohana2.getTasa()/100)*inversionJohana2.getValor())
             .build();
+
+        //Objetos 'guardados' en base de datos
+        transaccionMicro1 = this.copiarTransaccion(transaccionInversion1, 103L, 
+            LocalDateTime.of(2021, 12, 1, 1, 10, 0));
+        transaccionMicro2 = this.copiarTransaccion(transaccionInversion2, 104L,
+            LocalDateTime.now());
+
+        transaccionReclamoMicro1BD = this.copiarTransaccion(transaccionReclamoMicro1, 105L,
+            LocalDateTime.now());
+        transaccionReclamoMicro2BD = this.copiarTransaccion(transaccionReclamoMicro2, 106L,
+            LocalDateTime.now());
+        
+        transaccionReclamoMicro2BD.setMonto(transaccionReclamoMicro2.getMonto());
+
+        inversionBD1 = this.copiarInversion(inversionJohana1, 15L);
+        inversionBD2 = this.copiarInversion(inversionJohana2, 16L);
+
+        inversionBD1.setTransaccionEnvio(transaccionMicro1);
+        inversionBD1.setTransaccionEnvioId(transaccionMicro1.getTransaccionId());
+        inversionBD2.setTransaccionEnvio(transaccionMicro2);
+        inversionBD2.setTransaccionEnvioId(transaccionMicro2.getTransaccionId());
+    }
+
+    protected InversionVirtual copiarInversion(InversionVirtual inversion, Long inversionId) {
+        InversionVirtual copia = new InversionVirtual();
+        BeanUtils.copyProperties(inversion, copia);
+        copia.setInversionId(inversionId);
+        return copia;
+    }
+
+    protected Transaccion copiarTransaccion (Transaccion transaccion, Long transaccionId, LocalDateTime fechaCreacion) {
+        Transaccion copia = new Transaccion();
+        BeanUtils.copyProperties(transaccion, copia);
+        copia.setTransaccionId(transaccionId);
+        copia.setFechaCreacion(fechaCreacion);
+        return copia;
     }
 
     protected void validarInversion(
