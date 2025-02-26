@@ -13,14 +13,12 @@ import com.BancoC.InversionVirtual.repositories.InversionVirtualRepository;
 import com.BancoC.InversionVirtual.servicios.contratos.InversionOperaciones;
 import com.BancoC.InversionVirtual.servicios.contratos.MicroservicioCuentas;
 
-@Service
 public class InversionService implements InversionOperaciones {
 
     private final MicroservicioCuentas micro;
 
     private final InversionVirtualRepository repository;
 
-    //@Value("${integraciones.cuenta-bancaria-corporativa.id}:1")
     private Long cuentaCorporativaId; 
 
     public InversionService(MicroservicioCuentas micro,

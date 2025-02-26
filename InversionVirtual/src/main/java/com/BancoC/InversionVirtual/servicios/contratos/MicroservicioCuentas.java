@@ -6,14 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.BancoC.InversionVirtual.modelos.ext.CuentaBancaria;
 import com.BancoC.InversionVirtual.modelos.ext.Transaccion;
 
-@FeignClient(name = "micro-cuentas", url = "${integraciones.micro-cuentas.url}")
-@RequestMapping("/api/cuenta")
+@FeignClient(name = "micro-cuentas", url = "${integraciones.micro-cuentas.url}", path = "/api/cuenta")
 public interface MicroservicioCuentas {
         @GetMapping("{cuentaId}")
         ResponseEntity<CuentaBancaria> obtenerCuenta(

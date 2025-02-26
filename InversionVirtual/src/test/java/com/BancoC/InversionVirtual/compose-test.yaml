@@ -1,0 +1,13 @@
+services:
+  micro-db:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=cuentabancaria'
+      - 'POSTGRES_PASSWORD=ejemplo123'
+      - 'POSTGRES_USER=admin'
+    ports:
+      - '5430:5432'
+  micro:
+    image: 'jdarguello10/spring-taller6-cuenta:latest'
+    ports:
+      - '8080:8080'
