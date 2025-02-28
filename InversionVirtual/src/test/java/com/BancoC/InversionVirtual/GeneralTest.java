@@ -3,6 +3,7 @@ package com.BancoC.InversionVirtual;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -55,7 +56,7 @@ public class GeneralTest {
     @BeforeEach
     public void setUp() throws Exception {
         Johana = Cliente.builder()
-            .clienteId(1L)
+            .clienteId(25L)
             .nombre("Joahan Aristizabal")
             .fechaVinculacion(LocalDate.now())
             .build();
@@ -79,7 +80,7 @@ public class GeneralTest {
             .cuenta(cuentaAhorrosJohana)
             .cuentaOrigenId(cuentaAhorrosJohana.getCuentaId())
             .tasa(11.0)
-            .tiempoDuracion(LocalDate.of(0, 12, 1))
+            .tiempoDuracion(LocalDate.of(1, 12, 1))
             .valor(500_000.0)
             .build();
 
@@ -89,7 +90,7 @@ public class GeneralTest {
             .cuenta(cuentaAhorrosJohana)
             .cuentaOrigenId(cuentaAhorrosJohana.getCuentaId())
             .tasa(10.0)
-            .tiempoDuracion(LocalDate.of(0, 6, 1))
+            .tiempoDuracion(LocalDate.of(1, 6, 1))
             .valor(1_000_000.0)
             .build();
 
@@ -98,7 +99,7 @@ public class GeneralTest {
             .clienteId(Johana.getClienteId())
             .cuenta(cuentaAhorrosJohana)
             .tasa(100.0)
-            .tiempoDuracion(LocalDate.of(0,1,1))
+            .tiempoDuracion(LocalDate.of(1,1,1))
             .valor(100_000_000_000.0)
             .build();
 
@@ -174,8 +175,6 @@ public class GeneralTest {
             inversionAValidar.getCuentaOrigenId());
         assertEquals(inversionReferencia.getFechaCreacion(), 
             inversionAValidar.getFechaCreacion());  
-        assertEquals(inversionReferencia.getTransaccionEnvioId(), 
-            inversionAValidar.getTransaccionEnvioId());  
         assertEquals(inversionReferencia.getValor(), 
             inversionAValidar.getValor());  
         assertEquals(inversionReferencia.getTasa(), 

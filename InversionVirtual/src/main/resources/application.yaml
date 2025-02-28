@@ -1,6 +1,6 @@
 server:
     address: 0.0.0.0
-    port: 8081
+    port: 8080
 
 spring:
     profiles:
@@ -8,7 +8,7 @@ spring:
 
 integraciones:
     micro-cuentas:
-        url: http://localhost:8080
+        url: http://localhost:8082
     cuenta-bancaria-corporativa:
         id: 1
 
@@ -41,6 +41,11 @@ spring:
     jpa:
         hibernate:
             ddl-auto: update
+    
+logging:
+    level:
+        feign:
+            logger: DEBUG
 
 ---
 

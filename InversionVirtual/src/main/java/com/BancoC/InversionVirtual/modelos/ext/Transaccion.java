@@ -17,4 +17,9 @@ public class Transaccion {
     private LocalDateTime fechaCreacion;
     private CuentaBancaria cuentaOrigen;
     private CuentaBancaria cuentaDestino;
+    private String tipo;
+
+    public String getTipo() {
+        return "movimiento";
+    }
 }

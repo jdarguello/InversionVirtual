@@ -7,3 +7,15 @@ services:
       - 'POSTGRES_USER=admin'
     ports:
       - '5432:5432'
+  micro-cuentas-db:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=cuentabancaria'
+      - 'POSTGRES_PASSWORD=ejemplo123'
+      - 'POSTGRES_USER=admin'
+    ports:
+      - '5430:5432'
+  micro-cuentas:
+    image: 'jdarguello10/spring-taller6-cuenta:latest'
+    ports:
+      - '8082:8080'

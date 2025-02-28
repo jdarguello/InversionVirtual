@@ -1,5 +1,5 @@
 services:
-  micro-db:
+  micro-cuentas-db:
     image: 'postgres:latest'
     environment:
       - 'POSTGRES_DB=cuentabancaria'
@@ -7,7 +7,10 @@ services:
       - 'POSTGRES_USER=admin'
     ports:
       - '5430:5432'
-  micro:
+    volumes:
+      - './01-init.sql:/docker-entrypoint-initdb.d/01-init.sql'
+      - './02-data.sql:/docker-entrypoint-initdb.d/02-data.sql'
+  micro-cuentas:
     image: 'jdarguello10/spring-taller6-cuenta:latest'
     ports:
-      - '8080:8080'
+      - '8082:8080'
