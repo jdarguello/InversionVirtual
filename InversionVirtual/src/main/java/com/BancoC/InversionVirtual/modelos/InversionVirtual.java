@@ -1,11 +1,14 @@
 package com.BancoC.InversionVirtual.modelos;
 
 import java.time.LocalDate;
+import java.time.Period;
 
+import com.BancoC.InversionVirtual.config.PeriodConverter;
 import com.BancoC.InversionVirtual.modelos.ext.Cliente;
 import com.BancoC.InversionVirtual.modelos.ext.CuentaBancaria;
 import com.BancoC.InversionVirtual.modelos.ext.Transaccion;
 
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -45,5 +48,7 @@ public class InversionVirtual {
     private Double valor;
     private Double tasa;
     private LocalDate fechaCreacion;
-    private LocalDate tiempoDuracion;
+
+    @Convert(converter = PeriodConverter.class)
+    private Period tiempoDuracion;
 }

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.BeanUtils;
@@ -80,7 +81,7 @@ public class GeneralTest {
             .cuenta(cuentaAhorrosJohana)
             .cuentaOrigenId(cuentaAhorrosJohana.getCuentaId())
             .tasa(11.0)
-            .tiempoDuracion(LocalDate.of(1, 12, 1))
+            .tiempoDuracion(Period.ofMonths(12))
             .valor(500_000.0)
             .build();
 
@@ -90,7 +91,7 @@ public class GeneralTest {
             .cuenta(cuentaAhorrosJohana)
             .cuentaOrigenId(cuentaAhorrosJohana.getCuentaId())
             .tasa(10.0)
-            .tiempoDuracion(LocalDate.of(1, 6, 1))
+            .tiempoDuracion(Period.ofMonths(6))
             .valor(1_000_000.0)
             .build();
 
@@ -99,7 +100,7 @@ public class GeneralTest {
             .clienteId(Johana.getClienteId())
             .cuenta(cuentaAhorrosJohana)
             .tasa(100.0)
-            .tiempoDuracion(LocalDate.of(1,1,1))
+            .tiempoDuracion(Period.ofDays(32))
             .valor(100_000_000_000.0)
             .build();
 
