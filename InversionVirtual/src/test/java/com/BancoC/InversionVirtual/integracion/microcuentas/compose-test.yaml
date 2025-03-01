@@ -12,5 +12,3 @@ services:
       - './02-data.sql:/docker-entrypoint-initdb.d/02-data.sql'
   micro-cuentas:
     image: 'jdarguello10/spring-taller6-cuenta:latest'
-    ports:
-      - '8082:8080'

@@ -1,6 +1,7 @@
 package com.BancoC.InversionVirtual.integracion;
 
 import java.io.File;
+import java.time.Duration;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +15,7 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.testcontainers.containers.ComposeContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
@@ -50,7 +52,7 @@ public class IntegracionConfigTest extends GeneralTest {
     public static ComposeContainer microCuentas = 
         new ComposeContainer(new File("src/test/java/com/BancoC/InversionVirtual/integracion/microcuentas/compose-test.yaml"))
             .withExposedService("micro-cuentas-db-1", 5432)
-            .withExposedService("micro-cuentas-1", 8080);
+            .withExposedService("micro-cuentas-1", 8080, Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(2)));
 
     //Configuración de la url de conexión al microservicio de cuentas
     @DynamicPropertySource
