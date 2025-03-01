@@ -52,7 +52,6 @@ public class IntegracionConfigTest extends GeneralTest {
         new ComposeContainer(new File("src/test/java/com/BancoC/InversionVirtual/integracion/microcuentas/compose-test.yaml"))
             .withExposedService("micro-cuentas-db-1", 5432)
             .withExposedService("micro-cuentas", 8080);
-            //.withExposedService("micro-cuentas", 8080, Wait.forHttp("/actuator/health").forStatusCode(200).withStartupTimeout(Duration.ofMinutes(1)));
 
     //Configuración de la url de conexión al microservicio de cuentas
     @DynamicPropertySource
