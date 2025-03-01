@@ -28,7 +28,6 @@ import com.BancoC.InversionVirtual.servicios.contratos.MicroservicioCuentas;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("test_integracion")
 @Testcontainers
 public class IntegracionConfigTest extends GeneralTest {
     
@@ -52,7 +51,8 @@ public class IntegracionConfigTest extends GeneralTest {
     public static ComposeContainer microCuentas = 
         new ComposeContainer(new File("src/test/java/com/BancoC/InversionVirtual/integracion/microcuentas/compose-test.yaml"))
             .withExposedService("micro-cuentas-db-1", 5432)
-            .withExposedService("micro-cuentas-1", 8080, Wait.forListeningPort().withStartupTimeout(Duration.ofMinutes(2)));
+            .withExposedService("micro-cuentas", 8080);
+            //.withExposedService("micro-cuentas", 8080, Wait.forHttp("/actuator/health").forStatusCode(200).withStartupTimeout(Duration.ofMinutes(1)));
 
     //Configuración de la url de conexión al microservicio de cuentas
     @DynamicPropertySource

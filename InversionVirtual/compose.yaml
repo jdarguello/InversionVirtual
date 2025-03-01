@@ -13,9 +13,18 @@ services:
       - 'POSTGRES_DB=cuentabancaria'
       - 'POSTGRES_PASSWORD=ejemplo123'
       - 'POSTGRES_USER=admin'
-    ports:
-      - '5430:5432'
+    networks:
+      - isolated
   micro-cuentas:
     image: 'jdarguello10/spring-taller6-cuenta:latest'
+    environment:
+      - DB_HOST=micro-cuentas-db
+      - DB_PORT=5432
     ports:
       - '8082:8080'
+    networks:
+      - isolated
+
+networks:
+  isolated:
+    driver: bridge

@@ -4,7 +4,11 @@ server:
 
 spring:
     profiles:
-        active: cloud
+        active: pruebas_funcionales
+    docker:
+        compose:
+            enabled: false
+
 
 integraciones:
     micro-cuentas:
@@ -12,6 +16,13 @@ integraciones:
     cuenta-bancaria-corporativa:
         id: 1
 
+management:
+    endpoints:
+        web:
+            exposure:
+                include: 
+                - health
+                - info
 ---
 
 spring:
@@ -32,7 +43,7 @@ spring:
 spring:
     config:
         activate:
-            on-profile: test_integracion
+            on-profile: pruebas_funcionales
     datasource:
         url: jdbc:postgresql://localhost:5432/inversion
         username: admin
