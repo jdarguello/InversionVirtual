@@ -4,6 +4,8 @@ metadata:
   name: inversion-virtual
   description: Microservicio de Inversión Virtual
   namespace: transacciones
+  annotations:
+    github.com/project-slug: 'jdarguello/InversionVirtual'
 spec:
   type: service
   lifecycle: production
