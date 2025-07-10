@@ -1,0 +1,17 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: inversion-virtual
+  description: Microservicio de Inversión Virtual
+  namespace: transacciones
+spec:
+  type: service
+  lifecycle: production
+  owner: ldc-CDT
+  system: Inversiones
+  dependsOn:
+    - resource:default/artists-db
+  dependencyOf:
+    - component:default/artist-web-lookup
+  providesApis:
+    - artist-api
