@@ -13,10 +13,8 @@ COPY src src
 # Generación del Spring Boot jar
 RUN gradle clean bootJar --no-daemon --refresh-dependencies --no-parallel --debug --scan
 
-
-
 # Etapa 2: crear un runtime con OpenJDK
-FROM openjdk:21-jdk-slim
+FROM docker.io/openjdk:21-jdk-slim
 WORKDIR /app
 # Copiar el jar de la Etapa 1
 COPY --from=builder /app/build/libs/*.jar app.jar
