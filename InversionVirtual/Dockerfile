@@ -1,5 +1,5 @@
 # Etapa 1: hacer el build de la aplicación con Gradle (generar el JAR)
-FROM gradle:jdk21 as builder
+FROM gradle:jdk21-corretto-al2023 as builder
 WORKDIR /app
 ENV GRADLE_USER_HOME=/app/.gradle
 RUN mkdir -p /app/.gradle && chmod -R 777 /app/.gradle
